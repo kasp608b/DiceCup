@@ -7,19 +7,21 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
     val mGenerator = Random()
-
+    var numberOfDice = 1
     val TAG = "MainActivity"
     val diceIds = arrayOf(0, R.drawable.dice_1, R.drawable.dice_2, R.drawable.dice_3, R.drawable.dice_4, R.drawable.dice_5, R.drawable.dice_6)
    val mHistory = mutableListOf<Pair<Int, Int>>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initializeDiceBoard(1)
+        var diceArray = arrayOf(6)
+        initializeDiceBoard(diceArray)
         ArrayAdapter.createFromResource(
                 this,
                 R.array.DiceNum_array,
@@ -37,9 +39,14 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val item = parent?.getItemAtPosition(position)
                 Log.d(TAG, "Spinner selection made $item")
-                val numberOfDice = position + 1
+                numberOfDice = position + 1
+                var diceArray = Array(numberOfDice, {i -> i * 1})
+                for (i in 0 until numberOfDice)
+                {
+                    diceArray[i] = 6
+                }
                 Log.d(TAG, "$numberOfDice")
-                initializeDiceBoard(numberOfDice)
+                initializeDiceBoard(diceArray)
             }
 
         }
@@ -88,11 +95,13 @@ class MainActivity : AppCompatActivity() {
         outState.putSerializable("history", mHistory.toTypedArray())
     }
 
-    private fun initializeDiceBoard( numberOfDice: Int)
+    private fun initializeDiceBoard( arrayOfDice: Array<Int>)
     {
         diceBoard.removeAllViewsInLayout()
-        for ( i in 1 .. numberOfDice){
-            Log.d(TAG, "Create Number of dice: $numberOfDice, i:  $i")
+        var arraySize = arrayOfDice.size
+        for ( i in 1 .. arraySize){
+            val imageView = ImageView(this)
+            Log.d(TAG, "Create Number of dice: $arraySize, i:  $i")
         }
     }
 
