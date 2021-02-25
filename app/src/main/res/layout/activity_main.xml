@@ -52,6 +52,15 @@
         android:layout_centerHorizontal="true"
         android:onClick="onClickRoll"
         />
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/Roll"
+        android:layout_marginLeft="10px"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBaseline="@+id/Roll"
+        android:id="@+id/spNumberOfDice">
+    </Spinner>
     <TextView
         android:id="@+id/tvHistory"
         android:layout_width="wrap_content"
@@ -59,6 +68,7 @@
         android:layout_below="@+id/Roll"
         android:text="this is history"
         android:layout_centerHorizontal="true"/>
+
 
     <Button
         android:layout_width="wrap_content"

@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">DiceCup</string>
     <string name="dicecup_version_1">Dicecup version 1</string>
+    <string-array name="DiceNum_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
 </resources>

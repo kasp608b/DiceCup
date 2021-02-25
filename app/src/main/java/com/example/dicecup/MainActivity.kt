@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -17,6 +18,26 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        ArrayAdapter.createFromResource(
+                this,
+                R.array.DiceNum_array,
+                android.R.layout.simple_spinner_dropdown_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spNumberOfDice.adapter = adapter
+        }
+
+        spNumberOfDice?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Log.d(TAG, "Nothing has been selected")
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val item = parent?.getItemAtPosition(position)
+                Log.d(TAG, "Spinner selection made $item")
+            }
+
+        }
         updateDiceImage(Pair(6, 6))
         Log.d(TAG, "OnCreate")
 
@@ -61,4 +82,5 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "history is saved")
         outState.putSerializable("history", mHistory.toTypedArray())
     }
+
 }
