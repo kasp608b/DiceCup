@@ -26,6 +26,7 @@
         android:background="@color/green">
 
 
+        <!--
         <ImageView
             android:id="@+id/imgDice1"
             android:layout_width="wrap_content"
@@ -42,6 +43,7 @@
             android:maxWidth="100dp"
             android:scaleType="center"
             android:adjustViewBounds="true" />
+            -->
     </LinearLayout>
     <Button
         android:id="@+id/Roll"
@@ -52,6 +54,16 @@
         android:layout_centerHorizontal="true"
         android:onClick="onClickRoll"
         />
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/Roll"
+        android:layout_alignTop="@+id/Roll"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="30px"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/spNumberOfDice">
+    </Spinner>
     <TextView
         android:id="@+id/tvHistory"
         android:layout_width="wrap_content"

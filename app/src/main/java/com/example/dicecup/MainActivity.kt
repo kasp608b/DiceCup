@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initializeDiceBoard(1)
         ArrayAdapter.createFromResource(
                 this,
                 R.array.DiceNum_array,
@@ -36,6 +37,9 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val item = parent?.getItemAtPosition(position)
                 Log.d(TAG, "Spinner selection made $item")
+                val numberOfDice = position + 1
+                Log.d(TAG, "$numberOfDice")
+                initializeDiceBoard(numberOfDice)
             }
 
         }
@@ -54,8 +58,8 @@ class MainActivity : AppCompatActivity() {
     fun onClickRoll(view: View) {
         val d1 = mGenerator.nextInt(6) + 1
         val d2 = mGenerator.nextInt(6) + 1
-        imgDice1.setImageResource(diceIds[d1])
-        imgDice2.setImageResource(diceIds[d2])
+        //imgDice1.setImageResource(diceIds[d1])
+        //imgDice2.setImageResource(diceIds[d2])
         mHistory.add(Pair(d1, d2))
         updateHistory()
     }
@@ -69,8 +73,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateDiceImage(p: Pair<Int,Int>)
     {
-        imgDice1.setImageResource(diceIds[p.first])
-        imgDice2.setImageResource(diceIds[p.second])
+        //imgDice1.setImageResource(diceIds[p.first])
+        //imgDice2.setImageResource(diceIds[p.second])
     }
 
     fun onCLickClear(view: View) {
@@ -83,5 +87,14 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "history is saved")
         outState.putSerializable("history", mHistory.toTypedArray())
     }
+
+    private fun initializeDiceBoard( numberOfDice: Int)
+    {
+        diceBoard.removeAllViewsInLayout()
+        for ( i in 1 .. numberOfDice){
+            Log.d(TAG, "Create Number of dice: $numberOfDice, i:  $i")
+        }
+    }
+
 
 }
