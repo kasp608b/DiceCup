@@ -15,6 +15,15 @@
         android:layout_alignParentTop="true"
         android:textSize="25dp"
         android:textStyle="bold"/>
+    <Button
+        android:id="@+id/historyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="History"
+        android:layout_below="@+id/Roll"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickHistory"
+        />
 
     <LinearLayout
         android:id="@+id/diceBoard"
@@ -64,21 +73,6 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/spNumberOfDice">
     </Spinner>
-    <TextView
-        android:id="@+id/tvHistory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Roll"
-        android:text="this is history"
-        android:layout_centerHorizontal="true"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Clear"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="onCLickClear"/>
 
 
 </RelativeLayout>
