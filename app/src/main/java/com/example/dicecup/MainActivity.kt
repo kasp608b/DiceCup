@@ -1,13 +1,13 @@
 package com.example.dicecup
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.TableRow
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 val item = parent?.getItemAtPosition(position)
                 Log.d(TAG, "Spinner selection made $item")
                 numberOfDice = position + 1
-                var diceArray = Array(numberOfDice, {i -> i * 1})
+                var diceArray = Array(numberOfDice, { i -> i * 1 })
                 for (i in 0 until numberOfDice)
                 {
                     diceArray[i] = 6
@@ -50,35 +50,43 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-        updateDiceImage(Pair(6, 6))
         Log.d(TAG, "OnCreate")
 
         if (savedInstanceState != null)
         {
             Log.d(TAG, "saved state NOT null")
-            val history = savedInstanceState.getSerializable("history") as Array<Pair<Int,Int>>
+            val history = savedInstanceState.getSerializable("history") as Array<Pair<Int, Int>>
             history.forEach { p -> mHistory.add(p) }
             updateHistory()
         }
     }
 
     fun onClickRoll(view: View) {
-        val d1 = mGenerator.nextInt(6) + 1
+
+        /*val d1 = mGenerator.nextInt(6) + 1
         val d2 = mGenerator.nextInt(6) + 1
         //imgDice1.setImageResource(diceIds[d1])
         //imgDice2.setImageResource(diceIds[d2])
         mHistory.add(Pair(d1, d2))
-        updateHistory()
+        updateHistory()*/
+
+        var diceArray = Array(numberOfDice, { i -> i * 1 })
+        for (i in 0 until numberOfDice)
+        {
+            diceArray[i] = mGenerator.nextInt(6) + 1
+        }
+        Log.d(TAG, "$numberOfDice")
+        initializeDiceBoard(diceArray)
     }
 
     private fun updateHistory() {
         var s = ""
-        mHistory.forEach{p -> val e1 = p.first; val e2 = p.second
+        mHistory.forEach{ p -> val e1 = p.first; val e2 = p.second
         s += "$e1 - $e2\n"}
         tvHistory.text = s
     }
 
-    private fun updateDiceImage(p: Pair<Int,Int>)
+    private fun updateDiceImage(p: Pair<Int, Int>)
     {
         //imgDice1.setImageResource(diceIds[p.first])
         //imgDice2.setImageResource(diceIds[p.second])
@@ -95,12 +103,15 @@ class MainActivity : AppCompatActivity() {
         outState.putSerializable("history", mHistory.toTypedArray())
     }
 
-    private fun initializeDiceBoard( arrayOfDice: Array<Int>)
+    private fun initializeDiceBoard(arrayOfDice: Array<Int>)
     {
         diceBoard.removeAllViewsInLayout()
         var arraySize = arrayOfDice.size
         for ( i in 1 .. arraySize){
             val imageView = ImageView(this)
+            imageView.layoutParams = TableRow.LayoutParams(150, 150)
+            imageView.setImageResource(diceIds[arrayOfDice[i - 1]])
+            diceBoard.addView(imageView)
             Log.d(TAG, "Create Number of dice: $arraySize, i:  $i")
         }
     }

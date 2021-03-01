@@ -46,6 +46,7 @@
             -->
 
     </LinearLayout>
+
     <Button
         android:id="@+id/Roll"
         android:layout_width="wrap_content"
