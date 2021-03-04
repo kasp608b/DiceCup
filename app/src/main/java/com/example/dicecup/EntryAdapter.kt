@@ -29,6 +29,8 @@ class EntryAdapter(context: Context,
         val e = entries[position]
         val numbers = resView.findViewById<TextView>(R.id.numbers)
         var s = ""
+
+        s += "${e.time}:  "
         e.ListofNumbers.forEach { n ->
            s += "$n "
         }

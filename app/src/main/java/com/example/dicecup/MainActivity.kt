@@ -1,6 +1,7 @@
 package com.example.dicecup
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,8 +9,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TableRow
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.time.Instant
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -68,6 +73,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun onClickRoll(view: View) {
 
         var diceArray = Array(numberOfDice, { i -> i * 1 })
@@ -76,7 +82,10 @@ class MainActivity : AppCompatActivity() {
             diceArray[i] = mGenerator.nextInt(6) + 1
 
         }
-        mHistory2DList.add(Entry(diceArray))
+        mHistory2DList.add(Entry(diceArray, DateTimeFormatter
+                .ofPattern("HH:mm:ss")
+                .withZone(ZoneOffset.UTC)
+                .format(Instant.now()) ))
         Log.d(TAG, "$numberOfDice")
         initializeDiceBoard(diceArray)
 
